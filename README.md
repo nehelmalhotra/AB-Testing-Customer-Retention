@@ -46,30 +46,26 @@ https://www.datacamp.com/projects/184
 
   ![One_Day_Retention](images/1_day_retention.png)
 
-# Bootstrapping and Retention Distribution <a name="bootstrapping"></a>
+- Looking at the player retention after 1 and 7 days for the two control groups, it is hard to say which one performed better.. 
 
-- The data contained a number of missing values for both numerical and categorical fields. The following methods were used to address the missing values:
-  - Drop columns were majority of the values are missing
-  - Drop columns were more almost all the values are of one category
-  - Impute values based on linear regression, mean or mode depending on suitability 
-- Feature engineering can add valuable information to the model by using exisiting features. Two new fewatures were created:
-  - Age of the house
-  - Total number of bathrooms
- - Categorical values are converted to numerical by using ordinal encoding and one hot encoding.    
+  ![Retention](images/User_retention_control_methods.png)
+  
+# Bootstrapping and Hypothesis Testing <a name="bootstrapping"></a>
 
-## Hypothesis Testing <a name="hypothesis"></a>
-- Cross validation is used the ensure that the model is not overfitting on the data.
-- The following regression models are used:
-  - Light Gradient Boosting Regressor
-  - XGBoost Regressor
-  - Gradient Boosting Regressor
-  - Random Forest Regressor
-  - Stacking CV Regressor
+- Using the Central Limit Theorem, we know that the distribution of the mean of a sample data is a normal distribution. Bootstrapping with replacement is used to genereate a number of sample data combinations and the mean retention values are plotted for the two control methods.
 
-- The resuls obtained are then plotted and best 3 models are using to create and ensemble which is used in making predictions.
+ ![Retention_bootstrapping](images/mean_retention_distribution7.png)
+
+- The null hypothesis and alternate hypothesis are chosen as follows:
+  - Null Hypothesis (H0) : The two control methods have the same mean retention.  
+  - Alternate Hypothesis (H1) : The two control methods do not have the same mean retention.  
+
+- A student's t-test is conducted using the stats module from the scipy library.
 
 ## Conclusion <a name="conclusion"></a>
 
-A prediction RMSE of 0.133 is obtained. This can be further improved by conducting hyperparamter tuning and uisng more models in the ensemble. 
+A p value of 0 is obtained, which means that this result is statistically significant and the null hypothesis is rejected. 
+
+Based on this the 30 level break is preferred for increased customer retention. 
 
 
